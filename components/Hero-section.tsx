@@ -26,6 +26,23 @@ export default function HeroSection() {
                         Elite sports management and training for dedicated athletes.
                     </p>
 
+                    {/* Stats Row */}
+                    <div className="flex space-x-6 mb-10 text-white">
+                        <div>
+                            <div className="text-xl font-medium">250+</div>
+                            <div className="text-xs text-gray-400 uppercase tracking-wide">Athletes</div>
+                        </div>
+                        <div>
+                            <div className="text-xl font-medium">15</div>
+                            <div className="text-xs text-gray-400 uppercase tracking-wide">Years</div>
+                        </div>
+                        <div>
+                            <div className="text-xl font-medium">98%</div>
+                            <div className="text-xs text-gray-400 uppercase tracking-wide">Success</div>
+                        </div>
+                    </div>
+
+
                     {/* Single Call-to-Action */}
                     <div>
                         <button className="bg-emerald-600 text-white py-3 px-8 hover:bg-emerald-700 transition-colors">
