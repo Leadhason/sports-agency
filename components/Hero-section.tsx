@@ -1,63 +1,59 @@
+import Image from "next/image";
+import { Plus } from 'lucide-react';
+import Link from "next/link"
+
+
 export default function HeroSection() {
     return(
         <div className="relative">
-            <div className="bg-[url('/field-2.jpg')] bg-cover bg-center h-screen">
+            <div className="relative min-h-screen">
+                {/* Background Video */}
+                <video 
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline
+                >
+                    <source src="/video.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                
                 {/* Subtle overlay */}
-                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="absolute inset-0 bg-black/30"></div>
                 
                 {/* Bottom transition overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
-                
-                {/* Hero Content */}
-                <div className="absolute left-0 z-10 flex flex-col justify-center max-w-xl p-8 h-screen ml-24">
-                    {/* Main Heading */}
-                    <h1 className="text-5xl font-bold text-white mb-2">
-                        WELCOME TO 
-                        <span className="block text-emerald-400">EMPIRE</span>
+                <div className="absolute inset-0 -mb-[250px] items-end justify-center flex">
+                    <h1 className="text-[380px] font-mono font-semibold text-white text-center"> 
+                        EMPIRE
                     </h1>
-                    
-                    {/* Subheading */}
-                    <h2 className="text-xl text-gray-300 mb-6 font-light">
-                        Where Champions Are Made
-                    </h2>
-                    
-                    {/* Description */}
-                    <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-                        Elite sports management and training for dedicated athletes.
-                    </p>
-
-                    {/* Stats Row */}
-                    <div className="flex space-x-6 mb-10 text-white">
-                        <div>
-                            <div className="text-xl font-medium">250+</div>
-                            <div className="text-xs text-gray-400 uppercase tracking-wide">Athletes</div>
-                        </div>
-                        <div>
-                            <div className="text-xl font-medium">15</div>
-                            <div className="text-xs text-gray-400 uppercase tracking-wide">Years</div>
-                        </div>
-                        <div>
-                            <div className="text-xl font-medium">98%</div>
-                            <div className="text-xs text-gray-400 uppercase tracking-wide">Success</div>
-                        </div>
+                </div>
+                <div className="absolute inset-0 flex -mt-[150px] items-center justify-between px-8">
+                    <div className="text-left items-center justify-start flex max-w-xl px-8">
+                        <p className="text-lg font-light font-serif text-white">(01)
+                        <span className="block">A Yogyakarta-based creative agency pushing brands beyond boundaries — through design, storytelling, and strategy.</span>
+                        </p>
                     </div>
+                    <div className="bg-white w-[250px] max-h-[300px] p-4 rounded-2xl">
+                        <div className="flex items-center justify-between">
+                            <Image src="/logoipsum.svg" alt="Logo" width={40} height={40} />
 
-
-                    {/* Single Call-to-Action */}
-                    <div>
-                        <button className="bg-emerald-600 text-white py-3 px-8 hover:bg-emerald-700 transition-colors">
-                            Get in touch
-                        </button>
+                            <Plus size={24} className="text-black font-light text-sm"/>
+                        </div>
+                        <Image src="/field.jpg" alt="Mockup" width={220} height={180} className="mt-4 rounded-none object-cover"/>      
+                        
+                        <Link href="" className="underline font-medium text-lg text-center flex items-center justify-center mt-4 underline-offset-4">See Our Talent</Link>
                     </div>
                 </div>
-                
+               
+                                
                 {/* Scroll Indicator */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center text-white animate-bounce">
+                {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center text-white animate-bounce">
                     <span className="text-xs uppercase tracking-wide mb-2 opacity-75">Scroll</span>
                     <svg className="w-5 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
-                </div>
+                </div> */}
             </div>
         </div>
     )

@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
-import { SUSE } from "next/font/google";
+import { Italiana, Roboto, Nunito } from "next/font/google";
 import "./globals.css";
 
-const suseMono = SUSE({
-  variable: "--font-suse-mono",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-});
+  const italiana = Italiana({
+    variable: "--font-italiana",
+    subsets: ["latin"],
+    weight: ["400"],
+  });
+
+  const roboto = Roboto({
+    variable: "--font-roboto",
+    subsets: ["latin"],
+    weight: ["100", "200", "300", "400", "500"],
+  });
+
+  const nunito = Nunito({
+    variable: "--font-nunito",
+    subsets: ["latin"],
+    weight: ["200", "300", "400", "500", "600", "700", "800"],
+  });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${suseMono.variable} antialiased font-mono`}
+        className={`${italiana.variable} ${roboto.variable} ${nunito.variable} antialiased`}
       >
         {children}
       </body>
