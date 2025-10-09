@@ -107,6 +107,11 @@ function TestimonialsSection() {
     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  const goToSlide = (index: number) => {
+    setIsAutoPlaying(false);
+    setCurrentSlide(index);
+  };
+
 
   return (
     <div className="bg-white text-black px-10 py-20">
