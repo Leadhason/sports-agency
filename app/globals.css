@@ -5,7 +5,9 @@
   --foreground: #ffffff;
 }
 
-@theme inline {
+/* Theme variables moved into :root (removed invalid @theme rule) */
+
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-roboto);
