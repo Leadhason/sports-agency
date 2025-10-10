@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --font-family-sans: var(--font-roboto), system-ui, sans-serif;
+  --font-family-mono: var(--font-italiana), monospace;
+  --font-family-serif: var(--font-nunito), serif;
+}
+
 :root {
   --background: #171717;
   --foreground: #ffffff;
-}
-
-/* Theme variables moved into :root (removed invalid @theme rule) */
-
-:root {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-roboto);
-  --font-mono: var(--font-italiana);
-  --font-serif: var(--font-nunito);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${italiana.variable} ${roboto.variable} ${nunito.variable} antialiased`}
+        className={`${italiana.variable} ${roboto.className} ${nunito.variable} antialiased`}
       >
         {children}
       </body>

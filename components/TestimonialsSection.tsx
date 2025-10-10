@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from "next/image"
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import Link from "next/link"
 
 interface Testimonial {
   id: number;
@@ -107,20 +108,17 @@ function TestimonialsSection() {
     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const goToSlide = (index: number) => {
-    setIsAutoPlaying(false);
-    setCurrentSlide(index);
-  };
 
 
   return (
     <div className="bg-white text-black px-10 py-20">
       {/* Header */}
-      <div className="mb-16">
-        <h2 className="text-6xl font-mono font-semibold mb-4">ATHLETE STORIES</h2>
-        <p className="text-xl text-gray-600 font-light max-w-2xl">
+      <div className="mb-16 border-t border-gray-300 pt-8 flex justify-between w-full items-center">
+        <p className="text-lg font-medium">WHAT OUR <span className="text-gray-300">ATHLETES SAY</span></p>
+        <p className="text-md text-gray-600 text-center font-medium max-w-lg">
           Hear from the elite athletes whose careers we've elevated and the success stories that drive us forward.
         </p>
+        <p className="text-lg font-serif text-gray-300 font-medium">07<span className="text-black"> REVIEWS</span></p>
       </div>
 
       {/* Carousel Container */}
@@ -188,35 +186,8 @@ function TestimonialsSection() {
           <ChevronRight className="h-5 w-5 text-gray-600" />
         </button>
 
-        {/* Dots Indicator */}
-        <div className="flex justify-center mt-8 space-x-2">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                index === currentSlide ? 'bg-black' : 'bg-gray-300'
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
-      {/* Bottom CTA - matching pattern from other sections */}
-      <div className="mt-20 text-center">
-        <div className="border-t border-gray-200 pt-16">
-          <h3 className="text-3xl font-mono font-semibold mb-6">
-            Ready to Elevate Your Athletic Career?
-          </h3>
-          <p className="text-gray-600 font-light text-lg mb-8 max-w-2xl mx-auto">
-            Join the elite athletes who trust Empire Sports Agency to maximize their potential and secure their futures.
-          </p>
-          <button className="border border-black px-8 py-4 rounded hover:bg-black hover:text-white transition-all duration-300 font-medium">
-            START YOUR JOURNEY
-          </button>
-        </div>
-      </div>
     </div>
   )
 }

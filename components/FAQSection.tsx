@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowDownRight } from 'lucide-react'
 
 interface FAQ {
   id: number;
@@ -52,52 +52,72 @@ function FAQSection() {
   return (
     <div className="bg-white text-black px-10 py-20">
       {/* Header */}
-      <div className="mb-16 text-center">
-        <h2 className="text-6xl font-mono font-semibold mb-4">FREQUENTLY ASKED</h2>
-        <p className="text-xl text-gray-600 font-light max-w-3xl mx-auto">
-          Common questions about athlete representation, contracts, and how Empire Sports Agency elevates athletic careers.
+      <div className="mb-16 border-t border-gray-300 pt-8 flex justify-between w-full">
+        <p className="text-lg font-medium">FAQs</p>
+        <p className="text-lg text-gray-600 text-left font-medium max-w-lg flex flex-col">
+          Have questions? <span className="text-black">Discover the answers here</span>
         </p>
+        <p className="text-lg font-serif text-gray-300 font-medium">07<span className="text-black"> QUESTIONS</span></p>
       </div>
 
-      {/* FAQ List */}
-      <div className="max-w-4xl mx-auto space-y-6">
-        {faqs.map((faq) => (
-          <div 
-            key={faq.id} 
-            className="border-y-gray-100 overflow-hidden"
-          >
-            <button 
-              onClick={() => toggleFAQ(faq.id)}
-              className="w-full px-8 py-6 text-left flex items-center justify-between"
-            >
-              <h3 className="text-xl font-mono font-semibold text-black pr-4">
-                {faq.question}
-              </h3>
-              <div className="flex-shrink-0">
-                {openFAQ === faq.id ? (
-                  <ChevronUp className="h-6 w-6 text-black" />
-                ) : (
-                  <ChevronDown className="h-6 w-6 text-gray-400" />
-                )}
-              </div>
-            </button>
+      <div className="mb-16 flex justify-between items-start">
+        <div className="max-w-md">
+          <h2 className="text-xl font-semibold text-black mb-4">Still got more questions?</h2>
+          <p className="text-gray-500 leading-relaxed">
+            Our proven process eliminates complexities, saves you time and money, and ensures a successful athletic career journey.
+          </p>
+          <button className="mt-6 border-b border-black pb-1 text-black font-medium hover:text-gray-600 transition-colors">
+            ASK YOUR QUESTION
+            <ArrowDownRight className="w-4 h-4 inline-block ml-1" />
+          </button>
+        </div>  
+        
+        <div className="flex-1 max-w-2xl ml-20">
+          <div className="space-y-0">
+            {faqs.map((faq) => (
+              <div key={faq.id} className="border-t border-gray-200">
+                <button 
+                  onClick={() => toggleFAQ(faq.id)}
+                  className="w-full py-8 text-left flex items-center justify-between group"
+                >
+                  <h3 className="text-xl font-medium text-black pr-8 group-hover:text-gray-600 transition-colors">
+                    {faq.question}
+                  </h3>
+                  <div className="flex-shrink-0">
+                    {openFAQ === faq.id ? (
+                      <div className="w-8 h-8 flex items-center justify-center">
+                        <div className="w-4 h-0.5 bg-black"></div>
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8 flex items-center justify-center">
+                        <div className="relative">
+                          <div className="w-4 h-0.5 bg-black"></div>
+                          <div className="w-0.5 h-4 bg-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </button>
 
-            {/* Answer */}
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                openFAQ === faq.id
-                  ? "max-h-96 opacity-100"
-                  : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="px-8 py-6 bg-white border-t border-gray-200">
-                <p className="text-gray-700 leading-relaxed font-light">
-                  {faq.answer}
-                </p>
+                {/* Answer */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openFAQ === faq.id
+                      ? "max-h-96 opacity-100"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="pb-8 pr-12">
+                    <p className="text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
+            <div className="border-t border-gray-200"></div>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Dark CTA Section */}

@@ -3,23 +3,30 @@
 import React from 'react'
 import Image from "next/image"
 import { Plus } from 'lucide-react'
+import Link from "next/link"
+import { ArrowUpRight } from 'lucide-react'
+
 
 function WorksSection() {
   return (
     <div className="bg-white text-black px-10 py-20">
       {/* Header */}
-      <div className="mb-16">
-        <h2 className="text-6xl font-mono font-semibold mb-4">SUCCESS STORIES</h2>
-        <p className="text-xl text-gray-600 font-light max-w-2xl">
+      <div className="mb-16 border-b border-gray-300 pb-8 flex justify-between w-full items-center">
+        <p className="text-lg font-serif font-medium">OUR <span className="text-gray-300">ATHLETES</span></p>
+        <p className="text-md text-gray-600 text-center font-medium max-w-lg">
           Celebrating the achievements of our elite athletes and the game-changing contracts that elevated their careers to new heights.
         </p>
+         <Link href="/services" className="border border-black/30 px-6 py-3 rounded hover:bg-black hover:text-white transition-all duration-300 flex items-center gap-2">
+          VIEW ALL
+          <ArrowUpRight className="w-4 h-4" />
+        </Link>
       </div>
 
       {/* Bento Grid */}
       <div className="grid grid-cols-12 grid-rows-6 gap-4 h-[800px]">
         
         {/* Marcus Johnson NFL Deal - Large card [01] */}
-        <div className="col-span-4 row-span-3 relative group overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <div className="col-span-4 row-span-3 relative group overflow-hidden rounded-0 border border-gray-200 hover:shadow-xl transition-all duration-300">
           <div className="relative h-full">
             <Image 
               src="/field.jpg" 
@@ -49,7 +56,7 @@ function WorksSection() {
         </div>
 
         {/* Sarah Chen Nike Deal - Medium card [02] */}
-        <div className="col-span-4 row-span-2 relative group overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <div className="col-span-4 row-span-2 relative group overflow-hidden rounded-0 border border-gray-200 hover:shadow-xl transition-all duration-300">
           <div className="relative h-full">
             <Image 
               src="/lead-1.jpg" 
@@ -78,7 +85,7 @@ function WorksSection() {
         </div>
 
         {/* David Rodriguez Trade - Medium card [03] */}
-        <div className="col-span-4 row-span-2 relative group overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <div className="col-span-4 row-span-2 relative group overflow-hidden rounded-0 border border-gray-200 hover:shadow-xl transition-all duration-300">
           <div className="relative h-full">
             <Image 
               src="/lead-2.jpg" 
@@ -107,7 +114,7 @@ function WorksSection() {
         </div>
 
         {/* Amanda Foster Tennis - Medium card [04] */}
-        <div className="col-span-4 row-span-3 relative group overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <div className="col-span-4 row-span-3 relative group overflow-hidden rounded-0 border border-gray-200 hover:shadow-xl transition-all duration-300">
           <div className="relative h-full">
             <Image 
               src="/field.jpg" 
@@ -136,7 +143,7 @@ function WorksSection() {
         </div>
 
         {/* Global Bank - Medium card [06] */}
-        <div className="col-span-4 row-span-2 relative group overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <div className="col-span-4 row-span-2 relative group overflow-hidden rounded-0 border border-gray-200 hover:shadow-xl transition-all duration-300">
           <div className="relative h-full">
             <Image 
               src="/lead-1.jpg" 
@@ -165,7 +172,7 @@ function WorksSection() {
         </div>
 
         {/* Lisa Park Olympics - Large card [05] */}
-        <div className="col-span-4 row-span-4 relative group overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300">
+        <div className="col-span-4 row-span-4 relative group overflow-hidden rounded-0 border border-gray-200 hover:shadow-xl transition-all duration-300">
           <div className="relative h-full">
             <Image 
               src="/lead-2.jpg" 
