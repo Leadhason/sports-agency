@@ -120,21 +120,35 @@ function FAQSection() {
         </div>
       </div>
 
-      {/* Dark CTA Section */}
-      <div className="mt-20 bg-black text-white rounded-2xl p-16 text-center">
-        <h3 className="text-4xl font-mono font-semibold mb-6">
-          Ready to Take Your Career to the Next Level?
-        </h3>
-        <p className="text-xl font-light mb-8 max-w-2xl mx-auto text-gray-300">
-          Our expert team is here to discuss your athletic career goals and show you how Empire can maximize your potential.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-white text-black px-8 py-4 rounded font-semibold hover:bg-gray-100 transition-colors duration-300">
-            Schedule a Consultation
-          </button>
-          <button className="border border-white text-white px-8 py-4 rounded font-semibold hover:bg-white hover:text-black transition-all duration-300">
-            Contact Our Team
-          </button>
+      {/* Refined Minimal CTA */}
+      <div className="mt-20">
+        <div className="bg-black rounded-2xl px-16 py-16 text-center relative overflow-hidden">
+          {/* Single subtle accent */}
+          <div className="absolute top-6 right-6 w-2 h-2 bg-white/20 rounded-full"></div>
+          
+          <div className="max-w-2xl mx-auto">
+            <h3 className="text-4xl font-light text-white mb-6 leading-tight">
+              Ready to elevate 
+              <span className="font-mono italic"> your game?</span>
+            </h3>
+            
+            <p className="text-gray-400 mb-10 leading-relaxed">
+              Every champion needs the right representation. Let's discuss how we can unlock your potential.
+            </p>
+
+            <div className="flex items-center justify-center gap-6">
+              <button className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center gap-3 group">
+                <span>Start Conversation</span>
+                <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+                  <ArrowDownRight className="w-3 h-3 text-white" />
+                </div>
+              </button>
+              
+              <button className="text-white hover:text-gray-300 transition-colors duration-300 underline underline-offset-4 decoration-white/40 hover:decoration-white/80">
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

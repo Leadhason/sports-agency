@@ -4,9 +4,9 @@ This is a Next.js 15 sports agency website using the App Router with TypeScript,
 
 ## Architecture & Structure
 
-- **App Router Layout**: Uses Next.js App Router with `app/page.tsx` as main landing page
+- **App Router Layout**: Uses Next.js App Router with `app/page.tsx` as main landing page and `app/about/page.tsx` for about page
 - **Component-Based**: All UI components in `/components/` directory with clear section-based naming
-- **Single Page Application**: Currently a one-page site with sectioned components imported into `app/page.tsx`
+- **Multi-Page Application**: Main landing page is component-based sections, with separate routes for `/about` and other pages
 
 ## Development Patterns
 
@@ -14,16 +14,17 @@ This is a Next.js 15 sports agency website using the App Router with TypeScript,
 - Use **default exports** for all components (established pattern)
 - **Naming Convention**: PascalCase with descriptive suffixes (`HeroSection`, `AboutSection`, `TrustedBy`)
 - **File Structure**: One component per file in `/components/` directory
-- Mix of functional components, some use `'use client'` directive when needed (e.g., `Header.tsx` for state management)
+- **Client Components**: Interactive components use `'use client'` directive (`Header`, `ServicesSection`, `Footer`, `TestimonialsSection`, `FAQSection`, `WorksSection`)
+- **Server Components**: Static components like `Hero-section`, `AboutSection`, `TrustedBy`, `StatsSection` remain server-side
 
 ### Styling & Design
 - **Tailwind CSS 4**: Primary styling framework with custom CSS variables in `globals.css`
 - **Font Strategy**: Three custom Google Fonts configured in `layout.tsx`:
-  - `--font-roboto`: Primary sans-serif (body text)
-  - `--font-italiana`: Mono font for headers
-  - `--font-nunito`: Serif font for accents
+  - `--font-roboto`: Primary sans-serif (body text, weights: 100-500)
+  - `--font-italiana`: Mono font for headers (weight: 400)
+  - `--font-nunito`: Serif font for accents (weights: 200-800)
 - **Typography Classes**: Use `font-mono`, `font-serif` classes that map to custom font variables
-- **Color Scheme**: Dark theme support with CSS custom properties, primarily black/white with gray accents
+- **Color Scheme**: Primarily white background with black text, video backgrounds with overlays
 
 ### Images & Assets
 - **Next.js Image**: Always use `next/image` component for optimization
@@ -42,8 +43,9 @@ This is a Next.js 15 sports agency website using the App Router with TypeScript,
 
 ### Development Commands
 - **Dev Server**: `npm run dev` (uses Turbopack for faster builds)
-- **Build**: `npm run build --turbopack`
-- **Lint**: `eslint` (ESLint 9 with Next.js config)
+- **Build**: `npm run build` (Turbopack enabled in package.json)
+- **Start**: `npm start` (production server)
+- **Lint**: `npm run lint` (ESLint 9 with Next.js config)
 
 ### Component Patterns
 - **Hero Section**: Video background with overlay, absolute positioning for text layers

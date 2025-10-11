@@ -13,78 +13,78 @@ function ServicesSection() {
   }
 
   return (
-    <div className="bg-black text-white px-10 py-20">
-      {/* Header Section */}
-      <div className="flex items-center justify-between mb-16">
-        <h2 className="text-2xl font-semibold font-mono">OUR SERVICES</h2>
+    <div className="bg-black text-white px-4 sm:px-10 py-20">
+      {/* Header Section - Mobile responsive */}
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-16 gap-8 lg:gap-0">
+        <h2 className="text-2xl font-semibold font-mono animate-fade-in-left">OUR SERVICES</h2>
         
-        <div className="text-center max-w-md">
+        <div className="text-left lg:text-center max-w-md order-3 lg:order-2 animate-fade-in">
           <p className="text-md font-light leading-tight">
             Comprehensive athlete representation services designed to maximize career potential and secure your future.
           </p>
         </div>
         
-        <Link href="/services" className="border border-white/30 px-6 py-3 rounded hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2">
+        <Link href="/services" className="border border-white/30 px-6 py-3 rounded hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 order-2 lg:order-3 group animate-fade-in-right">
           VIEW ALL
-          <ArrowUpRight className="w-4 h-4" />
+          <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
         </Link>
       </div>
 
       {/* Services List */}
       <div className="space-y-0">
         {/* Service 01 - Contract Negotiation */}
-        <div className="border-t border-white/20">
+        <div className="border-t border-white/20 animate-slide-in-up">
           <button 
             onClick={() => toggleService(1)}
-            className="w-full py-12 flex items-center justify-between transition-colors duration-300 px-6 -mx-6"
+            className="w-full py-8 lg:py-12 flex items-center justify-between transition-colors duration-300 px-4 lg:px-6 -mx-4 lg:-mx-6 hover:bg-white/5"
           >
-            <div className="flex items-center gap-16">
-              <span className="text-gray-400 text-lg font-serif">(01)</span>
+            <div className="flex items-center gap-4 lg:gap-16">
+              <span className="text-gray-400 text-lg font-serif hidden sm:block">(01)</span>
               <div className="text-left">
-                <h3 className="text-2xl font-semibold mb-2">Contract Negotiation</h3>
-                <p className="text-lg text-gray-400 font-light">Maximizing your value</p>
+                <h3 className="text-xl lg:text-2xl font-semibold mb-2">Contract Negotiation</h3>
+                <p className="text-base lg:text-lg text-gray-400 font-light">Maximizing your value</p>
               </div>
             </div>
             
-            <div className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group flex-shrink-0">
               {openService === 1 ? (
-                <Minus className="w-5 h-5 transition-transform duration-300" />
+                <Minus className="w-4 h-4 lg:w-5 lg:h-5 transition-transform duration-300" />
               ) : (
-                <Plus className="w-5 h-5 transition-transform duration-300" />
+                <Plus className="w-4 h-4 lg:w-5 lg:h-5 transition-transform duration-300" />
               )}
             </div>
           </button>
           
-          {/* Expanded Content */}
-          <div className={`overflow-hidden transition-all duration-500 ${openService === 1 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-            <div className="px-6 pb-12">
-              <div className="flex gap-16 ml-24">
+          {/* Expanded Content - Mobile responsive */}
+          <div className={`overflow-hidden transition-all duration-500 ${openService === 1 ? 'max-h-[500px] lg:max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+            <div className="px-4 lg:px-6 pb-8 lg:pb-12">
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:ml-24">
                 <div className="flex-1">
-                  <p className="text-gray-300 mb-8 leading-relaxed">
+                  <p className="text-gray-300 mb-6 lg:mb-8 leading-relaxed">
                     Our experienced negotiation team leverages deep market knowledge and industry relationships to secure 
                     the most favorable contract terms. We analyze comparable deals, assess market value, and fight for 
                     every dollar you deserve while protecting your long-term interests.
                   </p>
                   
-                  <div className="flex flex-wrap gap-4">
-                    <span className="text-gray-400 text-sm px-3 py-1 rounded">[ SALARY NEGOTIATION ]</span>
-                    <span className="text-gray-400 text-sm px-3 py-1 rounded">[ PERFORMANCE BONUSES ]</span>
-                    <span className="text-gray-400 text-sm  px-3 py-1 rounded">[ TRADE CLAUSES ]</span>
+                  <div className="flex flex-wrap gap-2 lg:gap-4">
+                    <span className="text-gray-400 text-xs lg:text-sm px-2 lg:px-3 py-1 rounded">[ SALARY NEGOTIATION ]</span>
+                    <span className="text-gray-400 text-xs lg:text-sm px-2 lg:px-3 py-1 rounded">[ PERFORMANCE BONUSES ]</span>
+                    <span className="text-gray-400 text-xs lg:text-sm px-2 lg:px-3 py-1 rounded">[ TRADE CLAUSES ]</span>
                   </div>
-                  <div className="flex flex-wrap gap-4 mt-2">
-                    <span className="text-gray-400 text-sm px-3 py-1 rounded">[ GUARANTEED MONEY ]</span>
-                    <span className="text-gray-400 text-sm px-3 py-1 rounded">[ CONTRACT EXTENSIONS ]</span>
-                    <span className="text-gray-400 text-sm px-3 py-1 rounded">[ INJURY PROTECTION ]</span>
+                  <div className="flex flex-wrap gap-2 lg:gap-4 mt-2">
+                    <span className="text-gray-400 text-xs lg:text-sm px-2 lg:px-3 py-1 rounded">[ GUARANTEED MONEY ]</span>
+                    <span className="text-gray-400 text-xs lg:text-sm px-2 lg:px-3 py-1 rounded">[ CONTRACT EXTENSIONS ]</span>
+                    <span className="text-gray-400 text-xs lg:text-sm px-2 lg:px-3 py-1 rounded">[ INJURY PROTECTION ]</span>
                   </div>
                 </div>
                 
-                <div className="w-64">
+                <div className="w-full lg:w-64 flex justify-center lg:justify-start">
                   <Image 
                     src="/field.jpg" 
                     alt="Contract Negotiation" 
                     width={250} 
                     height={180} 
-                    className="rounded-lg object-cover"
+                    className="rounded-lg object-cover hover:scale-105 transition-transform duration-300 w-full max-w-[250px]"
                   />
                 </div>
               </div>
