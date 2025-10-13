@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from "next/image"
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from "next/link"
@@ -75,6 +75,55 @@ const testimonials: Testimonial[] = [
 function TestimonialsSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const [carouselVisible, setCarouselVisible] = useState(false);
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Progressive disclosure animation
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px'
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      })
+    }, observerOptions)
+
+    const headerObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true)
+        }
+      })
+    }, observerOptions)
+
+    const carouselObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setCarouselVisible(true)
+        }
+      })
+    }, observerOptions)
+
+    if (sectionRef.current) sectionObserver.observe(sectionRef.current)
+    if (headerRef.current) headerObserver.observe(headerRef.current)
+    if (carouselRef.current) carouselObserver.observe(carouselRef.current)
+
+    return () => {
+      sectionObserver.disconnect()
+      headerObserver.disconnect()
+      carouselObserver.disconnect()
+    }
+  }, [])
 
   // Auto-play functionality
   useEffect(() => {
@@ -82,7 +131,7 @@ function TestimonialsSection() {
     
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % testimonials.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
@@ -91,9 +140,9 @@ function TestimonialsSection() {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
         key={index}
-        className={`h-4 w-4 ${
+        className={`h-4 w-4 sm:h-5 sm:w-5 ${
           index < rating ? "fill-black text-black" : "text-gray-300"
-        }`}
+        } transition-all duration-300`}
       />
     ));
   };
@@ -108,23 +157,36 @@ function TestimonialsSection() {
     setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-
-
   return (
-    <div className="bg-white text-black px-10 py-20">
+    <div 
+      ref={sectionRef}
+      className={`bg-white text-black px-4 sm:px-8 lg:px-10 py-16 sm:py-20 transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
       {/* Header */}
-      <div className="mb-16 border-t border-gray-300 pt-8 flex justify-between w-full items-center">
-        <p className="text-lg font-medium">WHAT OUR <span className="text-gray-300">ATHLETES SAY</span></p>
-        <p className="text-md text-gray-600 text-center font-medium max-w-lg">
+      <div 
+        ref={headerRef}
+        className={`mb-12 sm:mb-16 border-t border-gray-300 pt-6 sm:pt-8 flex flex-col lg:flex-row justify-between w-full items-start lg:items-center gap-6 lg:gap-0 transition-all duration-700 delay-300 ${
+          headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+        }`}
+      >
+        <p className="text-base sm:text-lg font-medium">WHAT OUR <span className="text-gray-300">ATHLETES SAY</span></p>
+        <p className="text-sm sm:text-md text-gray-600 text-left lg:text-center font-medium max-w-lg order-3 lg:order-2">
           Hear from the elite athletes whose careers we've elevated and the success stories that drive us forward.
         </p>
-        <p className="text-lg font-serif text-gray-300 font-medium">07<span className="text-black"> REVIEWS</span></p>
+        <p className="text-base sm:text-lg font-serif text-gray-300 font-medium order-2 lg:order-3">06<span className="text-black"> REVIEWS</span></p>
       </div>
 
       {/* Carousel Container */}
-      <div className="relative max-w-4xl mx-auto">
+      <div 
+        ref={carouselRef}
+        className={`relative max-w-5xl mx-auto transition-all duration-700 delay-500 ${
+          carouselVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         {/* Testimonial Slides */}
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-hidden rounded-lg sm:rounded-2xl">
           <div 
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -132,33 +194,33 @@ function TestimonialsSection() {
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="w-full flex-shrink-0 bg-gray-50 p-12"
+                className="w-full flex-shrink-0 bg-gray-50 p-6 sm:p-8 lg:p-12"
               >
-                <div className="text-center max-w-3xl mx-auto">
+                <div className="text-center max-w-4xl mx-auto">
                   {/* Rating */}
-                  <div className="flex items-center justify-center mb-8">
+                  <div className="flex items-center justify-center mb-6 sm:mb-8">
                     {renderStars(testimonial.rating)}
                   </div>
 
                   {/* Content */}
-                  <p className="text-gray-700 mb-12 leading-relaxed font-light text-2xl">
+                  <p className="text-gray-700 mb-8 sm:mb-10 lg:mb-12 leading-relaxed font-light text-lg sm:text-xl lg:text-2xl">
                     "{testimonial.content}"
                   </p>
 
                   {/* Author */}
-                  <div className="flex items-center justify-center">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.name}
                       width={80}
                       height={80}
-                      className="rounded-full object-cover mr-6"
+                      className="rounded-full object-cover w-16 h-16 sm:w-20 sm:h-20"
                     />
-                    <div className="text-left">
-                      <h4 className="font-semibold text-black font-mono text-xl mb-1">
+                    <div className="text-center sm:text-left">
+                      <h4 className="font-semibold text-black font-mono text-lg sm:text-xl mb-1">
                         {testimonial.name}
                       </h4>
-                      <p className="text-gray-600 font-light text-lg">
+                      <p className="text-gray-600 font-light text-base sm:text-lg">
                         {testimonial.role}, {testimonial.company}
                       </p>
                     </div>
@@ -172,18 +234,18 @@ function TestimonialsSection() {
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white flex items-center justify-center hover:bg-gray-100 transition-colors duration-300"
+          className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white flex items-center justify-center hover:scale-105 transition-all duration-300"
           aria-label="Previous testimonial"
         >
-          <ChevronLeft className="h-5 w-5 text-gray-600" />
+          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </button>
 
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white flex items-center justify-center hover:bg-gray-100 transition-colors duration-300"
+          className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white flex items-center justify-center hover:scale-105 transition-all duration-300"
           aria-label="Next testimonial"
         >
-          <ChevronRight className="h-5 w-5 text-gray-600" />
+          <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
         </button>
 
       </div>

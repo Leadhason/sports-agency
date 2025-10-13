@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ArrowDownRight } from 'lucide-react'
 
 interface FAQ {
@@ -44,55 +44,113 @@ const faqs: FAQ[] = [
 
 function FAQSection() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [headerVisible, setHeaderVisible] = useState(false)
+  const [contentVisible, setContentVisible] = useState(false)
+  const [ctaVisible, setCtaVisible] = useState(false)
+
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px'
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === sectionRef.current) {
+          setIsVisible(true)
+        } else if (entry.target === headerRef.current) {
+          setHeaderVisible(true)
+        } else if (entry.target === contentRef.current) {
+          setContentVisible(true)
+        } else if (entry.target === ctaRef.current) {
+          setCtaVisible(true)
+        }
+      })
+    }, observerOptions)
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    if (headerRef.current) observer.observe(headerRef.current)
+    if (contentRef.current) observer.observe(contentRef.current)
+    if (ctaRef.current) observer.observe(ctaRef.current)
+
+    return () => observer.disconnect()
+  }, [])
 
   const toggleFAQ = (faqNumber: number) => {
     setOpenFAQ(openFAQ === faqNumber ? null : faqNumber)
   }
 
   return (
-    <div className="bg-white text-black px-10 py-20">
+    <div 
+      ref={sectionRef}
+      className={`bg-white text-black px-4 sm:px-8 lg:px-10 py-16 sm:py-20 transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
       {/* Header */}
-      <div className="mb-16 border-t border-gray-300 pt-8 flex justify-between w-full">
-        <p className="text-lg font-medium">FAQs</p>
-        <p className="text-lg text-gray-600 text-left font-medium max-w-lg flex flex-col">
+      <div 
+        ref={headerRef}
+        className={`mb-12 sm:mb-16 border-t border-gray-300 pt-6 sm:pt-8 flex flex-col lg:flex-row justify-between w-full items-start lg:items-center gap-6 lg:gap-0 transition-all duration-700 delay-300 ${
+          headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+        }`}
+      >
+        <p className="text-base sm:text-lg font-medium">FAQs</p>
+        <p className="text-sm sm:text-lg text-gray-600 text-left lg:text-center font-medium max-w-lg flex flex-col">
           Have questions? <span className="text-black">Discover the answers here</span>
         </p>
-        <p className="text-lg font-serif text-gray-300 font-medium">07<span className="text-black"> QUESTIONS</span></p>
+        <p className="text-base sm:text-lg font-serif text-gray-300 font-medium">06<span className="text-black"> QUESTIONS</span></p>
       </div>
 
-      <div className="mb-16 flex justify-between items-start">
-        <div className="max-w-md">
-          <h2 className="text-xl font-semibold text-black mb-4">Still got more questions?</h2>
-          <p className="text-gray-500 leading-relaxed">
+      <div 
+        ref={contentRef}
+        className={`mb-12 sm:mb-16 flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-20 transition-all duration-700 delay-500 ${
+          contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+        }`}
+      >
+        <div className="w-full lg:max-w-md">
+          <h2 className="text-lg sm:text-xl font-semibold text-black mb-3 sm:mb-4">Still got more questions?</h2>
+          <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
             Our proven process eliminates complexities, saves you time and money, and ensures a successful athletic career journey.
           </p>
-          <button className="mt-6 border-b border-black pb-1 text-black font-medium hover:text-gray-600 transition-colors">
+          <button className="mt-4 sm:mt-6 border-b border-black pb-1 text-black font-medium hover:text-gray-600 transition-colors text-sm sm:text-base flex items-center gap-1">
             ASK YOUR QUESTION
-            <ArrowDownRight className="w-4 h-4 inline-block ml-1" />
+            <ArrowDownRight className="w-3 h-3 sm:w-4 sm:h-4" />
           </button>
         </div>  
         
-        <div className="flex-1 max-w-2xl ml-20">
+        <div className="flex-1 w-full max-w-3xl">
           <div className="space-y-0">
-            {faqs.map((faq) => (
-              <div key={faq.id} className="border-t border-gray-200">
+            {faqs.map((faq, index) => (
+              <div 
+                key={faq.id} 
+                className={`border-t border-gray-200 transition-all duration-500 ${
+                  contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                }`}
+                style={{ transitionDelay: contentVisible ? `${600 + index * 100}ms` : '0ms' }}
+              >
                 <button 
                   onClick={() => toggleFAQ(faq.id)}
-                  className="w-full py-8 text-left flex items-center justify-between group"
+                  className="w-full py-6 sm:py-8 text-left flex items-center justify-between group hover:bg-gray-50/50 px-2 sm:px-4 -mx-2 sm:-mx-4 rounded-lg transition-all duration-300"
                 >
-                  <h3 className="text-xl font-medium text-black pr-8 group-hover:text-gray-600 transition-colors">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-medium text-black pr-4 sm:pr-8 group-hover:text-gray-600 transition-colors">
                     {faq.question}
                   </h3>
                   <div className="flex-shrink-0">
                     {openFAQ === faq.id ? (
-                      <div className="w-8 h-8 flex items-center justify-center">
-                        <div className="w-4 h-0.5 bg-black"></div>
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
+                        <div className="w-3 sm:w-4 h-0.5 bg-black transition-transform duration-300"></div>
                       </div>
                     ) : (
-                      <div className="w-8 h-8 flex items-center justify-center">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
                         <div className="relative">
-                          <div className="w-4 h-0.5 bg-black"></div>
-                          <div className="w-0.5 h-4 bg-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                          <div className="w-3 sm:w-4 h-0.5 bg-black transition-transform duration-300"></div>
+                          <div className="w-0.5 h-3 sm:h-4 bg-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"></div>
                         </div>
                       </div>
                     )}
@@ -101,14 +159,14 @@ function FAQSection() {
 
                 {/* Answer */}
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
                     openFAQ === faq.id
-                      ? "max-h-96 opacity-100"
+                      ? "max-h-[500px] sm:max-h-96 opacity-100"
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="pb-8 pr-12">
-                    <p className="text-gray-600 leading-relaxed">
+                  <div className="pb-6 sm:pb-8 px-2 sm:px-4 pr-8 sm:pr-12">
+                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                       {faq.answer}
                     </p>
                   </div>
@@ -120,31 +178,35 @@ function FAQSection() {
         </div>
       </div>
 
-      {/* Refined Minimal CTA */}
-      <div className="mt-20">
-        <div className="bg-black rounded-2xl px-16 py-16 text-center relative overflow-hidden">
-          {/* Single subtle accent */}
-          <div className="absolute top-6 right-6 w-2 h-2 bg-white/20 rounded-full"></div>
+      {/* CTA Section */}
+      <div 
+        ref={ctaRef}
+        className={`mt-16 sm:mt-20 transition-all duration-700 delay-700 ${
+          ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
+        <div className="bg-black rounded-xl sm:rounded-2xl px-6 sm:px-12 lg:px-16 py-12 sm:py-16 text-center relative overflow-hidden">
+          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/20 rounded-full"></div>
           
           <div className="max-w-2xl mx-auto">
-            <h3 className="text-4xl font-light text-white mb-6 leading-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-4 sm:mb-6 leading-tight">
               Ready to elevate 
               <span className="font-mono italic"> your game?</span>
             </h3>
             
-            <p className="text-gray-400 mb-10 leading-relaxed">
+            <p className="text-gray-400 mb-8 sm:mb-10 leading-relaxed text-sm sm:text-base">
               Every champion needs the right representation. Let's discuss how we can unlock your potential.
             </p>
 
-            <div className="flex items-center justify-center gap-6">
-              <button className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center gap-3 group">
-                <span>Start Conversation</span>
-                <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                  <ArrowDownRight className="w-3 h-3 text-white" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <button className="w-full sm:w-auto bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-3 group">
+                <span className="text-sm sm:text-base">Start Conversation</span>
+                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-black rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+                  <ArrowDownRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
                 </div>
               </button>
               
-              <button className="text-white hover:text-gray-300 transition-colors duration-300 underline underline-offset-4 decoration-white/40 hover:decoration-white/80">
+              <button className="text-white hover:text-gray-300 transition-colors duration-300 underline underline-offset-4 decoration-white/40 hover:decoration-white/80 text-sm sm:text-base">
                 Learn More
               </button>
             </div>
