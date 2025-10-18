@@ -23,7 +23,7 @@ const ContactPage: React.FC = () => {
     email: '',
     phone: '',
     careerStage: '',
-    services: [] as String[],
+    services: [],
     goals: ''
   });
 
