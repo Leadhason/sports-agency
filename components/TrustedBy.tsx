@@ -3,14 +3,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from "next/image"
 
+interface LogoItemProps {
+  src: string;
+  alt: string;
+  delay: number;
+}
+
 function TrustedBy() {
-  const [visibleRefs, setVisibleRefs] = useState(new Set())
+  const [visibleRefs, setVisibleRefs] = useState<Set<Element>>(new Set())
   
-  const sectionRef = useRef(null)
-  const headerRef = useRef(null)
-  const containerRef = useRef(null)
-  const firstRowRef = useRef(null)
-  const secondRowRef = useRef(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const firstRowRef = useRef<HTMLDivElement>(null)
+  const secondRowRef = useRef<HTMLDivElement>(null)
   
   const refs = {
     section: sectionRef,
@@ -41,9 +47,9 @@ function TrustedBy() {
     return () => observer.disconnect()
   }, [])
 
-  const isVisible = (ref) => visibleRefs.has(ref.current)
+  const isVisible = (ref: React.RefObject<HTMLDivElement>) => ref.current ? visibleRefs.has(ref.current) : false
 
-  const LogoItem = ({ src, alt, delay }) => (
+  const LogoItem: React.FC<LogoItemProps> = ({ src, alt, delay }) => (
     <div
       className={`flex items-center justify-center hover:scale-110 transition-all duration-500 ${
         isVisible(containerRef) ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
