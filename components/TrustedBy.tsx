@@ -47,7 +47,7 @@ function TrustedBy() {
     return () => observer.disconnect()
   }, [])
 
-  const isVisible = (ref: React.RefObject<HTMLDivElement>) => ref.current ? visibleRefs.has(ref.current) : false
+  const isVisible = (ref: React.RefObject<HTMLDivElement | null>) => ref.current ? visibleRefs.has(ref.current) : false
 
   const LogoItem: React.FC<LogoItemProps> = ({ src, alt, delay }) => (
     <div
