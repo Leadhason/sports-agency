@@ -104,7 +104,7 @@ function FAQSection() {
         <p className="text-sm sm:text-lg text-gray-600 text-left lg:text-center font-medium max-w-lg flex flex-col">
           Have questions? <span className="text-black">Discover the answers here</span>
         </p>
-        <p className="text-base sm:text-lg font-serif text-gray-300 font-medium">06<span className="text-black"> QUESTIONS</span></p>
+        <p className="text-base sm:text-lg text-gray-300 font-medium">06<span className="text-black"> QUESTIONS</span></p>
       </div>
 
       <div 
