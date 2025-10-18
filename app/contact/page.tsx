@@ -17,7 +17,7 @@ const ContactPage: React.FC = () => {
   goals: string;
   }
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<FormData>({
     name: '',
     sport: '',
     email: '',
