@@ -175,7 +175,7 @@ function TestimonialsSection() {
         <p className="text-sm sm:text-md text-gray-600 text-left lg:text-center font-medium max-w-lg order-3 lg:order-2">
           Hear from the elite athletes whose careers we've elevated and the success stories that drive us forward.
         </p>
-        <p className="text-base sm:text-lg font-serif text-gray-300 font-medium order-2 lg:order-3">06<span className="text-black"> REVIEWS</span></p>
+        <p className="text-base sm:text-lg text-gray-300 font-medium order-2 lg:order-3">06<span className="text-black"> REVIEWS</span></p>
       </div>
 
       {/* Carousel Container */}

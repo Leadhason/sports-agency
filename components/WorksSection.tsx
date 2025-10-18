@@ -12,7 +12,7 @@ function WorksSection() {
     <div className="bg-white text-black px-4 sm:px-8 lg:px-10 py-16 sm:py-20 animate-fade-in-up">
       {/* Header */}
       <div className="mb-12 sm:mb-16 border-b border-gray-300 pb-6 sm:pb-8 flex flex-col lg:flex-row justify-between w-full items-start lg:items-center gap-6 lg:gap-0">
-        <p className="text-base sm:text-lg font-serif font-medium">OUR <span className="text-gray-300">ATHLETES</span></p>
+        <p className="text-base sm:text-lg font-medium">OUR <span className="text-gray-300">ATHLETES</span></p>
         <p className="text-sm sm:text-md text-gray-600 text-left lg:text-center font-medium max-w-lg order-3 lg:order-2">
           Celebrating the achievements of our elite athletes and the game-changing contracts that elevated their careers to new heights.
         </p>
