@@ -6,13 +6,24 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 const ContactPage: React.FC = () => {
+
+  interface FormData {
+  name: string;
+  sport: string;
+  email: string;
+  phone: string;
+  careerStage: string;
+  services: string[];
+  goals: string;
+  }
+
   const [formData, setFormData] = React.useState({
     name: '',
     sport: '',
     email: '',
     phone: '',
     careerStage: '',
-    services: [],
+    services: [] as String[],
     goals: ''
   });
 
